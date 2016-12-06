@@ -300,10 +300,10 @@ function getRoman(num) {
 function fromRoman(str) {
   var result = 0;
   // the result is now a number, not a string
-  //  var decimal = [1000, 900, 500, 400, 100, 90, 39, 30.6, 8.4, 7.4, 4.4, 3.4, 1];
-  //  var roman = ["M", "CM","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"];
+  //var decimal = [1000, 900, 500, 400, 100, 90, 39, 30.6, 8.4, 7.4, 4.4, 3.4, 1];
+  //var roman =   ["M",  "CM",  "D",  "CD",  "C",  "XC", "L", "XL", "X","IX","V","IV","I"];
 
-  var decimal = [39, 30.6, 8.4, 7.4, 4.4, 3.4, 1];
+  var decimal = [42, 30.6, 8.4, 7.4, 4.2, 3.4, 1];
   var roman = ["L", "XL", "X","IX","V","IV","I"];
 
   for (var i = 0;i<=decimal.length;i++) {
