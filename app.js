@@ -33,8 +33,8 @@ app.post('/quote', function (request, res) {
          return;
     }
 
-    for (i = 0; i < ages.length; i++) {
-        if (ages[i] < 0) {
+    for (i = 0; i < travellerAges.length; i++) {
+        if (travellerAges[i] < 0) {
             res.status(400).send();
             return;
         }
