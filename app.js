@@ -48,33 +48,29 @@ app.post('/quote', function (request, res) {
 
     // discount persons > 4
     if (travellerAges.length > 4) {
-        for (i = 0; i < travellerAges.length; i++) {
-            var numberAdult = 0;
-            var numberChilds = 0;
-            var age = travellerAges[i];
-            if (age > 25) {
-                numberAdult++;
-            } else {
-                numberChilds++;
-            }
-            if (numberAdult > 2) {
-                discountOf20Percent = true;
-            }
+        var numberAdult = 0;
+        var numberChilds = 0;
+        var age = travellerAges[i];
+        if (age > 25 && age < 65) {
+            numberAdult++;
+        } else {
+            numberChilds++;
+        }
+        if (numberAdult > 2) {
+            discountOf20Percent = true;
         }
     }
 
     // discount persons > 2
     var discountOf10Percent = false;
     if (travellerAges.length == 2) {
-        for (i = 0; i < travellerAges.length; i++) {
-            var numberAdult = 0;
-            var age = travellerAges[i];
-            if (age >= 18 && age <= 24) {
-                numberAdult++;
-            }
-            if (numberAdult == 2) {
-                discountOf10Percent = true;
-            }
+        var numberAdult = 0;
+        var age = travellerAges[i];
+        if (age >= 18 && age <= 24) {
+            numberAdult++;
+        }
+        if (numberAdult == 2) {
+            discountOf10Percent = true;
         }
     }
 
@@ -105,8 +101,8 @@ app.post('/quote', function (request, res) {
         quote = discountQuote;
     }
 
- // res.status(204).send();
-  res.json({"quote": quote});
+    //res.status(204).send();
+    res.json({"quote": quote});
 
     } catch (err) {
         res.status(400).send();
@@ -134,7 +130,6 @@ function calculateNumberOfDays(departureDate, returnDate) {
   var numberOfDays = duration.asDays();
 
   var numberOfDaysAsInt = parseInt(numberOfDays)
-    numberOfDaysAsInt++ // fixed wrong number of days...
 
   if (numberOfDaysAsInt > 7 && numberOfDaysAsInt <= 10) {
     numberOfDaysAsInt = 7
