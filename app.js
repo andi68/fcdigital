@@ -128,6 +128,7 @@ function calculateNumberOfDays(departureDate, returnDate) {
   var numberOfDays = duration.asDays();
 
   var numberOfDaysAsInt = parseInt(numberOfDays)
+    numberOfDaysAsInt++ // fixed wrong number of days...
 
   if (numberOfDaysAsInt > 7 && numberOfDaysAsInt <= 10) {
     numberOfDaysAsInt = 7
