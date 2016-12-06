@@ -61,6 +61,18 @@ app.post('/quote', function (request, res) {
         }
     }
 
+    // discount persons > 2
+    var discountOf10Percent = false;
+    if (travellerAges.length == 2) {
+        var numberAdult = 0;
+        var age = travellerAges[i];
+        if (age > 25) {
+            numberAdult++;
+        }
+        if (numberAdult == 2) {
+            discountOf10Percent = true;
+        }
+    }
 
   var coverList= {
     "Basic": 1.8,
@@ -75,6 +87,10 @@ app.post('/quote', function (request, res) {
   res.json({"quote": quote});
     if (discountOf20Percent) {
         discountQuote = quote * 0,8;
+        console.log("quote with discount: " + discountQuote);
+        quote = discountQuote;
+    } else if (discountOf10Percent) {
+        discountQuote = quote * 0,9;
         console.log("quote with discount: " + discountQuote);
         quote = discountQuote;
     }
