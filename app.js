@@ -58,7 +58,9 @@ function calculateQuote(_departureDate, _returnDate, _travellerAges, _country, _
       numberOfDays = calculateNumberOfDays(_departureDate, _returnDate),
       options = calcualteOptions(_options);
 
-  var quote =  (cover * country * ageRiskSum *  numberOfDays) +  options;
+  var roman = getRoman(numberOfDays);
+
+  var quote =  (cover * country * ageRiskSum *  roman) +  options;
 
   return quote
 
@@ -195,4 +197,43 @@ function calcualteOptions(options) {
     return optionSum;
 }
 
+function getRoman(_numberOfDays) {
+
+  if (_numberOfDays > 20) {
+    console.log("--> roman: fix to 16.8")
+    return 16.8
+  }    
+
+  var digit = [
+    0,
+    1,
+    2,
+    3,
+    3.4,
+    4.4,
+    5.4,
+    6.4,
+    7.4,
+    7.4,
+    8.4,
+    9.4,
+    10.4,
+    11.4,
+    11.8,
+    12.8,
+    13.8,
+    14.8,
+    15.8,
+    15.8,
+    16.8
+  ]
+
+  var ret = digit[_numberOfDays]
+
+  console.log("--> roman: ")
+  console.log(ret)
+
+  return ret
+
+}
 
