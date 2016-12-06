@@ -6,6 +6,8 @@ var express = require('express'),
 app.use(bodyParser.json());
 
 app.post('/quote', function (request, res) {
+
+    try {
  
  console.log(request.body)
  
@@ -37,6 +39,10 @@ app.post('/quote', function (request, res) {
 
   res.status(204).send();
   //res.json({"quote": quote});
+
+    } catch (err) {
+        res.status(400).send();
+    }
 
 });
 
