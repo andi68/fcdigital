@@ -95,7 +95,7 @@ function getCountry(country) {
     "BU": 1.1,
     "IM": 1.2,
     "HM": 0.7,
-    "SW": 1.2,
+    "SE": 1.2,
     "UK": 1.1,
     "PA": 1.6,
     "PN": 1.2,
