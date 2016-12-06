@@ -25,7 +25,7 @@ app.post('/quote', function (request, res) {
   console.log(options)
   console.log(cover)
 
-    if (country == null) {
+    if (country == null || getCountry(country) == null) {
          res.status(400).send();
     }
 
