@@ -29,16 +29,35 @@ app.post('/quote', function (request, res) {
 
   var countryCalc = getCountry(country)
 
+    // check country
     if (country == null || countryCalc == null) {
          console.log("---> country is null")
          res.status(400).send();
          return;
     }
 
+    // check ages
     for (i = 0; i < travellerAges.length; i++) {
         if (travellerAges[i] < 0) {
             res.status(400).send();
             return;
+        }
+    }
+
+    var discountOf20Percent = false;
+
+    // discount persons > 4
+    if (travellerAges.length > 4) {
+        var numberAdult = 0;
+        var numberChilds = 0;
+        var age = travellerAges[i];
+        if (age > 25) {
+            numberAdult++;
+        } else {
+            numberChilds++;
+        }
+        if (numberAdult > 2) {
+            discountOf20Percent = true;
         }
     }
 
@@ -53,6 +72,14 @@ app.post('/quote', function (request, res) {
 
   //res.status(204).send();
   res.json({"quote": quote});
+    if (discountOf20Percent) {
+        discountQuote = quote * 0,8;
+        console.log("quote with discount: " + discountQuote);
+        quote = discountQuote;
+    }
+
+  res.status(204).send();
+  //res.json({"quote": quote});
 
     } catch (err) {
         res.status(400).send();
