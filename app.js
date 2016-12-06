@@ -25,6 +25,10 @@ app.post('/quote', function (request, res) {
   console.log(options)
   console.log(cover)
 
+    if (country == null || getCountry(country) == null) {
+         res.status(400).send();
+    }
+
 
   var coverList= {
     "Basic": 1.8,
