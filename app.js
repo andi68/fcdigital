@@ -53,15 +53,21 @@ app.listen(3000, function () {
 
 
 function calculateNumberOfDays(departureDate, returnDate) {
+  console.log("------> in here ")
+
+
   var departureDateAsDate = moment(departureDate, 'YYYY-MM-DD'); 
   var returnDateAsDate = moment(returnDate, 'YYYY-MM-DD'); 
+
   var duration = moment.duration(returnDateAsDate.diff(departureDateAsDate));
   var numberOfDays = duration.asDays();
 
-  console.log("--> number of day: ")
-  console.log(numberOfDays)
+  var numberOfDaysAsInt = parseInt(numberOfDays)
 
-  return numberOfDays;
+  console.log("--> number of day: ")
+  console.log(numberOfDaysAsInt)
+
+  return numberOfDaysAsInt;
 }
 
 
