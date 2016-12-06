@@ -7,106 +7,35 @@ app.use(bodyParser.json());
 
 app.post('/quote', function (request, res) {
 
-    try {
+  try {
  
- console.log(request.body)
+    console.log(request.body)
  
-  var country = request.body.country,
+    var country = request.body.country,
         departureDate = request.body.departureDate,
         returnDate = request.body.returnDate,
         travellerAges = request.body.travellerAges,
         options = request.body.options,
         cover = request.body.cover;
 
-  console.log("---> start data from request")
-  console.log(country)
-  console.log(departureDate)
-  console.log(returnDate)
-  console.log(travellerAges)
-  console.log(options)
-  console.log(cover)
-  console.log("---> end data from request")
+    console.log("---> start data from request")
+    console.log(country)
+    console.log(departureDate)
+    console.log(returnDate)
+    console.log(travellerAges)
+    console.log(options)
+    console.log(cover)
+    console.log("---> end data from request")
 
-  var countryCalc = getCountry(country)
-
-    // check country
-    if (country == null || countryCalc == null) {
-         console.log("---> country is null")
-         res.status(400).send();
-         return;
-    }
-
-    // check ages
-    for (i = 0; i < travellerAges.length; i++) {
-        if (travellerAges[i] < 0) {
-            res.status(400).send();
-            return;
-        }
-    }
-
-    var discountOf20Percent = false;
-
-    // discount persons > 4
-    if (travellerAges.length > 4) {
-        var numberAdult = 0;
-        var numberChilds = 0;
-        var age = travellerAges[i];
-        if (age > 25 && age < 65) {
-            numberAdult++;
-        } else {
-            numberChilds++;
-        }
-        if (numberAdult > 2) {
-            discountOf20Percent = true;
-        }
-    }
-
-    // discount persons > 2
-    var discountOf10Percent = false;
-    if (travellerAges.length == 2) {
-        var numberAdult = 0;
-        var age = travellerAges[i];
-        if (age >= 18 && age <= 24) {
-            numberAdult++;
-        }
-        if (numberAdult == 2) {
-            discountOf10Percent = true;
-        }
-    }
-
-  var coverList= {
-    "Basic": 1.8,
-    "Extra": 2.4,
-    "Premier": 4.2 };
-
-
-  var daysBetween = daysBetween(departureDate, returnDate)
-  console.log("---> daysBetween: ")  
-  console.log(daysBetween)
-
-
-  var quote =  (coverList[cover] * countryCalc * calcualteAgeRisk(travellerAges) * calculateNumberOfDays(departureDate, returnDate) ) + calcualteOptions(options) ;
-  console.log("---> calculated quote: ")  
-  console.log(quote)
-
-  //res.status(204).send();
-  res.json({"quote": quote});
-    if (discountOf20Percent) {
-        discountQuote = quote * 0,8;
-        console.log("quote with discount: " + discountQuote);
-        quote = discountQuote;
-    } else if (discountOf10Percent) {
-        discountQuote = quote * 0,9;
-        console.log("quote with discount: " + discountQuote);
-        quote = discountQuote;
-    }
+    var quote =  calculateQuote(departureDate, returnDate, travellerAges, country, cover, options)
+    console.log("---> calculated quote: ")  
+    console.log(quote)
 
     //res.status(204).send();
     res.json({"quote": quote});
-
-    } catch (err) {
-        res.status(400).send();
-    }
+  } catch (err) {
+    res.status(400).send();
+  }
 
 });
 
@@ -122,6 +51,35 @@ app.listen(3000, function () {
 });
 
 
+function calculateQuote(_departureDate, _returnDate, _travellerAges, _country, _cover, _options) {
+  var country = getCountry(_country),
+      cover = getCover(_cover), 
+      ageRiskSum = calcualteAgeRisk(_travellerAges),
+      numberOfDays = calculateNumberOfDays(_departureDate, _returnDate),
+      options = calcualteOptions(_options);
+
+  var quote =  (cover * country * ageRiskSum *  numberOfDays) +  options;
+
+  return quote
+
+}
+
+function getCover(_cover) {
+  var coverList= {
+    "Basic": 1.8,
+    "Extra": 2.4,
+    "Premier": 4.2 };
+
+  var ret = coverList[_cover]
+
+  console.log("--> cover: ")
+  console.log(ret)
+
+  return ret
+}
+
+
+
 function calculateNumberOfDays(departureDate, returnDate) {
   var departureDateAsDate = moment(departureDate, 'YYYY-MM-DD'); 
   var returnDateAsDate = moment(returnDate, 'YYYY-MM-DD'); 
@@ -129,16 +87,12 @@ function calculateNumberOfDays(departureDate, returnDate) {
   var duration = moment.duration(returnDateAsDate.diff(departureDateAsDate));
   var numberOfDays = duration.asDays();
 
-  var numberOfDaysAsInt = parseInt(numberOfDays)
-
-  if (numberOfDaysAsInt > 7 && numberOfDaysAsInt <= 10) {
-    numberOfDaysAsInt = 7
-  }
+  var numberOfDaysAsInt = parseInt(numberOfDays) + 1
 
   console.log("--> number of day: ")
-  console.log(numberOfDaysAsInt)
+  console.log(numberOfDaysAsInt )
 
-  return numberOfDaysAsInt + 1;
+  return numberOfDaysAsInt;
 }
 
 
@@ -206,9 +160,9 @@ function calcualteAgeRisk(ages) {
     for (i = 0; i < ages.length; i++) { 
         if (ages[i] > 0 && ages[i] < 18) {
             result = result + 1.1;
-        } else if (ages[i] >= 18 && ages[i] < 24) {
+        } else if (ages[i] >= 18 && ages[i] <= 24) {
             result = result + 0.9;
-        } else if (ages[i] >= 24 && ages[i] < 65) {
+        } else if (ages[i] >= 25 && ages[i] <= 65) {
             result = result + 1.0;
         } else if (ages[i] >= 66 ) {
             result = result + 1.5;
@@ -241,17 +195,4 @@ function calcualteOptions(options) {
     return optionSum;
 }
 
-/**
- * Given two dates, calculate the days between the two dates.
- *
- * @param { Date } startdate Initial date.
- * @param { Date } enddate End date.
- * @returns { Number } Number of days between the two dates.
- */
-function daysBetween(_startdate, _enddate) {
-    var startdate = new Date(_startdate, 'YYYY-MM-DD'); 
-    var enddate = new Date(_enddate, 'YYYY-MM-DD'); 
-
-    return Math.round((enddate-startdate)/(1000*60*60*24));
-}
 
