@@ -66,7 +66,7 @@ app.post('/quote', function (request, res) {
     if (travellerAges.length == 2) {
         var numberAdult = 0;
         var age = travellerAges[i];
-        if (age > 25) {
+        if (age >= 18 && age <= 24) {
             numberAdult++;
         }
         if (numberAdult == 2) {
