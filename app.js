@@ -89,7 +89,7 @@ function calculateNumberOfDays(departureDate, returnDate) {
   var duration = moment.duration(returnDateAsDate.diff(departureDateAsDate));
   var numberOfDays = duration.asDays();
 
-  var numberOfDaysAsInt = parseInt(numberOfDays) + 1
+  var numberOfDaysAsInt = parseInt(numberOfDays)
 
   console.log("--> number of day: ")
   console.log(numberOfDaysAsInt )
@@ -199,14 +199,14 @@ function calcualteOptions(options) {
 
 function getRoman(_numberOfDays) {
 
-  if (_numberOfDays > 20) {
+  if (_numberOfDays > 30) {
     console.log("--> roman: fix to 16.8")
     return 16.8
   }    
 
   var digit = [
     0,
-    1,
+    1, //1
     2,
     3,
     3.4,
@@ -215,7 +215,7 @@ function getRoman(_numberOfDays) {
     6.4,
     7.4,
     7.4,
-    8.4,
+    8.4, //10
     9.4,
     10.4,
     11.4,
@@ -225,8 +225,18 @@ function getRoman(_numberOfDays) {
     14.8,
     15.8,
     15.8,
-    16.8
-  ]
+    16.8, //20
+    17.8,
+    18.8,
+    19.8,
+    20.2,
+    21.2,
+    22.2,
+    23.2,
+    24.2,
+    24.2,
+    25.2 //30
+]
 
   var ret = digit[_numberOfDays]
 
