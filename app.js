@@ -68,6 +68,7 @@ app.post('/quote', function (request, res) {
     "Premier": 4.2 };
 
   var quote =  (coverList[cover] * countryCalc * calcualteAgeRisk(travellerAges) * calculateNumberOfDays(departureDate, returnDate) ) + calcualteOptions(options) ;
+  console.log("---> calculated quote: ")  
   console.log(quote)
 
   //res.status(204).send();
