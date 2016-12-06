@@ -199,7 +199,7 @@ function calcualteOptions(options) {
 
 function getRoman(_numberOfDays) {
 
-  if (_numberOfDays > 30) {
+  if (_numberOfDays > 50) {
     console.log("--> roman: fix to 16.8")
     return 16.8
   }    
@@ -235,7 +235,27 @@ function getRoman(_numberOfDays) {
     23.2,
     24.2,
     24.2,
-    25.2 //30
+    25.2, //30
+    26.2,
+    27.2,
+    28.2,
+    30.6,
+    29.6,
+    30.6,
+    31.6,
+    32.6,
+    34.6,
+    33.6,  //40
+    34.6,
+    35.6,
+    36.6,
+    39.0,
+    38.0,
+    39.0,
+    40.0,
+    41.0,
+    43.0,
+    39.0 //50
 ]
 
   var ret = digit[_numberOfDays]
