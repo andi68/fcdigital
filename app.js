@@ -100,7 +100,7 @@ function getCountry(country) {
   var countryList = {
     "ES": 1.3,
     "LU": 1.3,
-    "GR": 0.6,
+    "EL": 0.6,
     "DO": 1.3,
     "IT": 1.2,
     "BU": 1.1,
@@ -142,7 +142,7 @@ function getCountry(country) {
     "SI": 0.8,
     "PL": 1.4,
     "HU": 1.1,
-    "TW": 1.6 
+    "TW": 1.6
   };
 
   var ret = countryList[country]
