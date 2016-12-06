@@ -25,8 +25,12 @@ app.post('/quote', function (request, res) {
   console.log(options)
   console.log(cover)
 
-    if (country == null || getCountry(country) == null) {
+  var countryCalc = getCountry(country)
+
+    if (country == null || countryCalc == null) {
+         console.log("---> country is null")
          res.status(400).send();
+         return;
     }
 
 
@@ -35,14 +39,11 @@ app.post('/quote', function (request, res) {
     "Extra": 2.4,
     "Premier": 4.2 };
 
-
-   console.log(coverList[cover])
-
-  var quote =  (coverList[cover] * getCountry(country) * calcualteAgeRisk(travellerAges) * calculateNumberOfDays(departureDate, returnDate) ) + calcualteOptions(options) ;
+  var quote =  (coverList[cover] * countryCalc * calcualteAgeRisk(travellerAges) * calculateNumberOfDays(departureDate, returnDate) ) + calcualteOptions(options) ;
   console.log(quote)
 
-  res.status(204).send();
-  //res.json({"quote": quote});
+  //res.status(204).send();
+  res.json({"quote": quote});
 
     } catch (err) {
         res.status(400).send();
@@ -83,9 +84,6 @@ function calculateNumberOfDays(departureDate, returnDate) {
 
 
 function getCountry(country) {
-  console.log("--> country in: ")
-  console.log(country) 
-
   var countryList = {
     "ES": 1.3,
     "LU": 1.3,
@@ -136,7 +134,7 @@ function getCountry(country) {
 
   var ret = countryList[country]
 
-  console.log("--> country: ")
+  console.log("--> country aftert search: ")
   console.log(ret)
 
   return ret
