@@ -18,12 +18,14 @@ app.post('/quote', function (request, res) {
         options = request.body.options,
         cover = request.body.cover;
 
+  console.log("---> start data from request")
   console.log(country)
   console.log(departureDate)
   console.log(returnDate)
   console.log(travellerAges)
   console.log(options)
   console.log(cover)
+  console.log("---> end data from request")
 
   var countryCalc = getCountry(country)
 
@@ -141,7 +143,7 @@ function getCountry(country) {
 
   var ret = countryList[country]
 
-  console.log("--> country aftert search: ")
+  console.log("--> country: ")
   console.log(ret)
 
   return ret
