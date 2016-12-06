@@ -27,6 +27,14 @@ app.post('/quote', function (request, res) {
 
     if (country == null || getCountry(country) == null) {
          res.status(400).send();
+         return;
+    }
+
+    for (i = 0; i < ages.length; i++) {
+        if (ages[i] < 0) {
+            res.status(400).send();
+            return;
+        }
     }
 
 
