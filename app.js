@@ -7,71 +7,22 @@ app.use(bodyParser.json());
 
 app.post('/testroman', function (request, res) {
 
-    logCalc(1);
-    logCalc(2);
-    logCalc(3);
-    logCalc(4);
-    logCalc(5);
-    logCalc(6);
-    logCalc(7);
-    logCalc(8);
-    logCalc(9);
-    logCalc(10);
-    logCalc(11);
+    getRoman(1);
+    getRoman(2);
+    getRoman(3);
+    getRoman(4);
+    getRoman(5);
+    getRoman(6);
+    getRoman(7);
+    getRoman(8);
+    getRoman(9);
+    getRoman(10);
+    getRoman(11);
 
-
-    logCalc(40);
-    logCalc(80);
+    getRoman(40);
+    getRoman(80);
 
 });
-
-function logCalc(num) {
-    var roman = decimalToRomanSimple(num);
-
-    var digit = fromRoman(roman)
-
-    console.log(num + "->" + roman + "->" + digit);
-}
-
-function fromRoman(str) {
-  var result = 0;
-  // the result is now a number, not a string
-
-//  var decimal = [1000, 900, 500, 400, 100, 90, 39, 30.6, 8.4, 7.4, 4.4, 3.4, 1];
-//  var roman = ["M", "CM","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"];
-
-  var decimal = [39, 30.6, 8.4, 7.4, 4.4, 3.4, 1];
-  var roman = ["L", "XL", "X","IX","V","IV","I"];
-
-  for (var i = 0;i<=decimal.length;i++) {
-    while (str.indexOf(roman[i]) === 0){
-    //checking for the first characters in the string
-      result += decimal[i];
-      //adding the decimal value to our result counter
-      str = str.replace(roman[i],'');
-      //remove the matched Roman letter from the beginning
-    }
-  }
-  return result;
-}
-
-function decimalToRomanSimple(value) {
-    var roman = new Array();
-    roman = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"];
-    var decimal = new Array();
-    decimal = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
-
-      if (value <= 0 || value >= 4000) return value;
-
-        var romanNumeral = "";
-        for (var i=0; i<roman.length; i++) {
-          while (value >= decimal[i]) {
-            value -= decimal[i];
-            romanNumeral += roman[i];
-          }
-        }
-        return romanNumeral;
-    }
 
 app.post('/quote', function (request, res) {
 
@@ -265,7 +216,7 @@ function calcualteOptions(options) {
     return optionSum;
 }
 
-function getRoman(_numberOfDays) {
+function getRomanManual(_numberOfDays) {
 
   if (_numberOfDays > 50) {
     console.log("--> roman: fix to 16.8")
@@ -334,4 +285,51 @@ function getRoman(_numberOfDays) {
   return ret
 
 }
+
+
+function getRoman(num) {
+  var roman = decimalToRomanSimple(num);
+  var digit = fromRoman(roman);
+
+  console.log("--> roman: ")
+  console.log(num + "->" + roman + "->" + digit);
+
+  return digit;
+}
+
+function fromRoman(str) {
+  var result = 0;
+  // the result is now a number, not a string
+  //  var decimal = [1000, 900, 500, 400, 100, 90, 39, 30.6, 8.4, 7.4, 4.4, 3.4, 1];
+  //  var roman = ["M", "CM","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"];
+
+  var decimal = [39, 30.6, 8.4, 7.4, 4.4, 3.4, 1];
+  var roman = ["L", "XL", "X","IX","V","IV","I"];
+
+  for (var i = 0;i<=decimal.length;i++) {
+    while (str.indexOf(roman[i]) === 0){
+      //checking for the first characters in the string
+      result += decimal[i];
+      str = str.replace(roman[i],'');
+    }
+  }
+  return result;
+}
+
+function decimalToRomanSimple(value) {
+    var roman = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"];
+    var decimal = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+
+      if (value <= 0 || value >= 4000) return value;
+
+        var romanNumeral = "";
+        for (var i=0; i<roman.length; i++) {
+          while (value >= decimal[i]) {
+            value -= decimal[i];
+            romanNumeral += roman[i];
+          }
+        }
+        return romanNumeral;
+    }
+
 
