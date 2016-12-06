@@ -35,8 +35,8 @@ app.post('/quote', function (request, res) {
   var quote =  (coverList[cover] * getCountry(country) * calcualteAgeRisk(travellerAges) * calculateNumberOfDays(departureDate, returnDate) ) + calcualteOptions(options) ;
   console.log(quote)
 
-  //res.status(204).send();
-  res.json({"quote": quote});
+  res.status(204).send();
+  //res.json({"quote": quote});
 
 });
 
@@ -53,9 +53,6 @@ app.listen(3000, function () {
 
 
 function calculateNumberOfDays(departureDate, returnDate) {
-  console.log("------> in here ")
-
-
   var departureDateAsDate = moment(departureDate, 'YYYY-MM-DD'); 
   var returnDateAsDate = moment(returnDate, 'YYYY-MM-DD'); 
 
@@ -64,12 +61,15 @@ function calculateNumberOfDays(departureDate, returnDate) {
 
   var numberOfDaysAsInt = parseInt(numberOfDays)
 
+  if (numberOfDaysAsInt > 7 && numberOfDaysAsInt <= 10) {
+    numberOfDaysAsInt = 7
+  }
+
   console.log("--> number of day: ")
   console.log(numberOfDaysAsInt)
 
   return numberOfDaysAsInt;
 }
-
 
 
 function getCountry(country) {
