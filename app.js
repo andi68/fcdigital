@@ -79,6 +79,12 @@ app.post('/quote', function (request, res) {
     "Extra": 2.4,
     "Premier": 4.2 };
 
+
+  var daysBetween = daysBetween(departureDate, returnDate)
+  console.log("---> daysBetween: ")  
+  console.log(daysBetween)
+
+
   var quote =  (coverList[cover] * countryCalc * calcualteAgeRisk(travellerAges) * calculateNumberOfDays(departureDate, returnDate) ) + calcualteOptions(options) ;
   console.log("---> calculated quote: ")  
   console.log(quote)
@@ -132,7 +138,7 @@ function calculateNumberOfDays(departureDate, returnDate) {
   console.log("--> number of day: ")
   console.log(numberOfDaysAsInt)
 
-  return numberOfDaysAsInt;
+  return numberOfDaysAsInt + 1;
 }
 
 
@@ -234,3 +240,18 @@ function calcualteOptions(options) {
 
     return optionSum;
 }
+
+/**
+ * Given two dates, calculate the days between the two dates.
+ *
+ * @param { Date } startdate Initial date.
+ * @param { Date } enddate End date.
+ * @returns { Number } Number of days between the two dates.
+ */
+function daysBetween(_startdate, _enddate) {
+    var startdate = new Date(_startdate, 'YYYY-MM-DD'); 
+    var enddate = new Date(_enddate, 'YYYY-MM-DD'); 
+
+    return Math.round((enddate-startdate)/(1000*60*60*24));
+}
+
