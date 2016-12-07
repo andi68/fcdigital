@@ -51,7 +51,7 @@ app.post('/quote', function (request, res) {
     console.log(quote)*/
 
     var offers = calculateOffers(country, travellerAges, cover);
-    console.log("offers:");
+    console.log("---> offers:");
     console.log(offers);
 
     //res.status(204).send();
