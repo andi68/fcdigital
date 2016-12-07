@@ -80,20 +80,24 @@ app.listen(3000, function () {
 
 function calculateOffers(_country, _travellerAges, _cover) {
 
+    var offers = [];
+
     if (_country == 'CH') {
-        return calculateOffer01();
+        offers = calculateOffer01();
 
     } else if (_country == 'US') {
-        return calculateOffer02();
+        offers = calculateOffer02();
 
     } else if (isFamily(_travellerAges)) {
-        return calculateOffer03();
+        offers = calculateOffer03();
 
     } else if (isExtraCover()) {
-        return calculateOffer04();
+        offers = calculateOffer04();
     }
 
-    return ["hotel", "car insurance", "gourmet"];
+    var basics = ["hotel", "car insurance", "gourmet"];
+    basics.push(offers);
+    return basics;
 }
 
 function calculateOffer01() {
