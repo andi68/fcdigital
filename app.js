@@ -95,9 +95,27 @@ function calculateOffers(_country, _travellerAges, _cover) {
         offers = calculateOffer04();
     }
 
+    if (isChildCare(_travellerAges)) {
+        offersChildCare = calculateOfferChildCare();
+        offers.push(offersChildCare);
+    }
+
     var basics = ["hotel", "car insurance", "gourmet"];
     basics.push(offers);
     return basics;
+}
+
+function calculateOfferChildCare() {
+    return ["child care"];
+}
+
+function isChildCare(_travellerAges) {
+    for (i = 0; i < _travellerAges.length; i++) {
+        var age = _travellerAges[i];
+        if (age < 18) {
+            return true;
+        }
+    }
 }
 
 function calculateOffer01() {
