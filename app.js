@@ -92,18 +92,22 @@ function calculateOffers(_country, _travellerAges, _cover) {
 }
 
 function calculateOffer01() {
+    // TODO implementation pending...
     return [];
 }
 
 function calculateOffer02() {
+    // TODO implementation pending...
     return [];
 }
 
 function calculateOffer03() {
+    // TODO implementation pending...
     return [];
 }
 
 function isFamily() {
+    // TODO implementation pending...
     return false;
 }
 
