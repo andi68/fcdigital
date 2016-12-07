@@ -50,8 +50,14 @@ app.post('/quote', function (request, res) {
     console.log("---> calculated quote: ")  
     console.log(quote)
 
+    var offers = [];
+
     //res.status(204).send();
-    res.json({"quote": quote});
+    res.json({
+        "quote": quote,
+        "offers": offers
+    });
+
   } catch (err) {
     res.status(400).send();
   }
