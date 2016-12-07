@@ -125,6 +125,9 @@ function isExtraCover() {
 }
 
 function calculateQuote(_departureDate, _returnDate, _travellerAges, _country, _cover, _options) {
+
+    return 0; // TODO ..............
+
   var country = getCountry(_country),
       cover = getCover(_cover), 
       ageRiskSum = calcualteAgeRisk(_travellerAges),
