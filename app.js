@@ -37,14 +37,14 @@ app.post('/quote', function (request, res) {
         options = request.body.options,
         cover = request.body.cover;
 
-    console.log("---> start data from request")
+    /*console.log("---> start data from request")
     console.log(country)
     console.log(departureDate)
     console.log(returnDate)
     console.log(travellerAges)
     console.log(options)
     console.log(cover)
-    console.log("---> end data from request")
+    console.log("---> end data from request")*/
 
     var quote =  calculateQuote(departureDate, returnDate, travellerAges, country, cover, options)
     console.log("---> calculated quote: ")  
@@ -84,7 +84,7 @@ function calculateOffers(_country, _travellerAges, _cover) {
     } else if (_country == 'US') {
         return calculateOffer02();
 
-    } else if (isFamily()) {
+    } else if (isFamily(_travellerAges)) {
         return calculateOffer03();
 
     } else if (isExtraCover()) {
@@ -114,8 +114,21 @@ function calculateOffer04() {
     return [];
 }
 
-function isFamily() {
+function isFamily(_travellerAges) {
     // TODO implementation pending...
+
+    var numberAdult = 0;
+    var numberChild = 0;
+
+    for (i = 0; i < _travellerAges.length; i++) {
+        var age = _travellerAges[i];
+        if (age >= 18) {
+            numberAdult++;
+        } else {
+            numberAdult++;
+        }
+    }
+
     return false;
 }
 
