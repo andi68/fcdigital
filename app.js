@@ -47,10 +47,12 @@ app.post('/quote', function (request, res) {
     console.log("---> end data from request")*/
 
     var quote =  calculateQuote(departureDate, returnDate, travellerAges, country, cover, options)
-    console.log("---> calculated quote: ")  
-    console.log(quote)
+    /*console.log("---> calculated quote: ")
+    console.log(quote)*/
 
     var offers = calculateOffers(country, travellerAges, cover);
+    console.log("offers:");
+    console.log(offers);
 
     //res.status(204).send();
     res.json({
@@ -127,7 +129,7 @@ function isFamily(_travellerAges) {
         }
     }
 
-    return numberAdult >= 1 && numberChild >= 1;
+    return (numberChild + numberAdult) && numberChild >= 2;
 }
 
 function isExtraCover() {
