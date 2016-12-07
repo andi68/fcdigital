@@ -96,7 +96,7 @@ function calculateOffers(_country, _travellerAges, _cover) {
     }
 
     if (isChildCare(_travellerAges)) {
-        offersChildCare = calculateOfferChildCare();
+        var offersChildCare = calculateOfferChildCare();
         offers.concat(offersChildCare);
     }
 
