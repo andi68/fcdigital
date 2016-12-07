@@ -83,10 +83,10 @@ function calculateOffers(_country, _travellerAges, _cover) {
     var offers = [];
 
     if (_country == 'CH') {
-        offers = calculateOffer01();
+        offers = calculateOfferCH();
 
     } else if (_country == 'US') {
-        offers = calculateOffer02();
+        offers = calculateOfferUS();
 
     } else if (isFamily(_travellerAges)) {
         offers = calculateOffer03();
@@ -118,12 +118,12 @@ function isChildCare(_travellerAges) {
     }
 }
 
-function calculateOffer01() {
+function calculateOfferCH() {
     // TODO implementation pending...
     return [];
 }
 
-function calculateOffer02() {
+function calculateOfferUS() {
     // TODO implementation pending...
     return [];
 }
