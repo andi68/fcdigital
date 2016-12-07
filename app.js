@@ -79,8 +79,13 @@ app.listen(3000, function () {
 function calculateOffers(_country, _travellerAges, _cover) {
 
     if (_country == 'CH') {
-        // ...
-        calculateOffer01();
+        return calculateOffer01();
+
+    } else if (_country == 'US') {
+        return calculateOffer02();
+
+    } else if (isFamily()) {
+        return calculateOffer03();
     }
 
     return [];
@@ -88,6 +93,18 @@ function calculateOffers(_country, _travellerAges, _cover) {
 
 function calculateOffer01() {
     return [];
+}
+
+function calculateOffer02() {
+    return [];
+}
+
+function calculateOffer03() {
+    return [];
+}
+
+function isFamily() {
+    return false;
 }
 
 function calculateQuote(_departureDate, _returnDate, _travellerAges, _country, _cover, _options) {
