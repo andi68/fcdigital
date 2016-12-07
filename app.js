@@ -100,7 +100,7 @@ function calculateOffers(_country, _travellerAges, _cover) {
         offers.push(offersChildCare);
     }
 
-    var basics = ["hotel", "car insurance", "gourmet"];
+    var basics = ["hotel", "car insurance", "premier"];
     basics.push(offers);
     return basics;
 }
