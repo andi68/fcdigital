@@ -129,7 +129,7 @@ function isFamily(_travellerAges) {
         }
     }
 
-    return false;
+    return numberAdult >= 1 && numberChild >= 1;
 }
 
 function isExtraCover() {
