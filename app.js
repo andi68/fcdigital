@@ -119,8 +119,7 @@ function isChildCare(_travellerAges) {
 }
 
 function calculateOfferCH() {
-    // TODO implementation pending...
-    return [];
+    return ["ski lessons", "ski equipment", "rental"];
 }
 
 function calculateOfferUS() {
