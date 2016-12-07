@@ -100,7 +100,7 @@ function calculateOffers(_country, _travellerAges, _cover) {
         offers.concat(offersChildCare);
     }
 
-    var basics = ["car", "premiercover", "clock", "cheese", "chocolate", "casino", "carInsurance", "hotel", "healtInsurance", "toys"];
+    var basics = ["car", "premier cover", "clock", "cheese", "chocolate", "casino", "car insurance", "hotel", "health insurance", "toys", "car rental"];
     basics.concat(offers);
     return basics;
 }
