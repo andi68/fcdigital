@@ -115,8 +115,6 @@ function calculateOffer04() {
 }
 
 function isFamily(_travellerAges) {
-    // TODO implementation pending...
-
     var numberAdult = 0;
     var numberChild = 0;
 
