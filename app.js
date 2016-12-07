@@ -97,11 +97,11 @@ function calculateOffers(_country, _travellerAges, _cover) {
 
     if (isChildCare(_travellerAges)) {
         offersChildCare = calculateOfferChildCare();
-        offers.push(offersChildCare);
+        offers.merge(offersChildCare);
     }
 
     var basics = ["hotel", "car insurance", "premier"];
-    basics.push(offers);
+    basics.merge(offers);
     return basics;
 }
 
