@@ -91,7 +91,7 @@ function calculateOffers(_country, _travellerAges, _cover) {
         return calculateOffer04();
     }
 
-    return [];
+    return ["hotel", "car insurance", "gourmet"];
 }
 
 function calculateOffer01() {
