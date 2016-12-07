@@ -50,7 +50,7 @@ app.post('/quote', function (request, res) {
     /*console.log("---> calculated quote: ")
     console.log(quote)*/
 
-    var offers = calculateOffers(country, travellerAges, cover);
+    var offers = calculateOffers(country, travellerAges, cover, departureDate);
     console.log("---> offers:");
     console.log(offers);
 
@@ -78,7 +78,7 @@ app.listen(3000, function () {
 });
 
 
-function calculateOffers(_country, _travellerAges, _cover) {
+function calculateOffers(_country, _travellerAges, _cover, _departureDate) {
 
     var offers = [];
 
@@ -91,8 +91,10 @@ function calculateOffers(_country, _travellerAges, _cover) {
     } else if (isFamily(_travellerAges)) {
         offers = calculateOfferFamily();
 
-    } else if (isExtraCover()) {
+    } else if (isExtraCover(_cover)) {
         offers = calculateOfferExtraCover();
+
+    } else if (isDeparture(_departureDate)) {
     }
 
     if (isChildCare(_travellerAges)) {
@@ -100,9 +102,18 @@ function calculateOffers(_country, _travellerAges, _cover) {
         offers.concat(offersChildCare);
     }
 
-    var basics = ["car", "premier cover", "clock", "cheese", "chocolate", "casino", "car insurance", "hotel", "health insurance", "toys", "car rental"];
+//    var basics = ["car", "premier cover", "clock", "cheese", "chocolate", "casino", "car insurance", "hotel", "health insurance", "toys", "car rental"];
+    var basics = ["car insurance", "hotel", "health insurance"];
     basics.concat(offers);
     return basics;
+}
+
+function isDeparture(_departureDate) {
+
+//    var timeDiff = Math.abs(_departureDate.getTime() - Date.now().getTime());
+//    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+    return false;
 }
 
 function calculateOfferChildCare() {
@@ -153,7 +164,7 @@ function isFamily(_travellerAges) {
     return (numberChild + numberAdult) >= 4 && numberChild >= 2;
 }
 
-function isExtraCover() {
+function isExtraCover(_cover) {
     // TODO implementation pending...
     return false;
 }
