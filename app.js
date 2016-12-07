@@ -86,6 +86,9 @@ function calculateOffers(_country, _travellerAges, _cover) {
 
     } else if (isFamily()) {
         return calculateOffer03();
+
+    } else if (isExtraCover()) {
+        return calculateOffer04();
     }
 
     return [];
@@ -106,7 +109,17 @@ function calculateOffer03() {
     return [];
 }
 
+function calculateOffer04() {
+    // TODO implementation pending...
+    return [];
+}
+
 function isFamily() {
+    // TODO implementation pending...
+    return false;
+}
+
+function isExtraCover() {
     // TODO implementation pending...
     return false;
 }
