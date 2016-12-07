@@ -50,7 +50,7 @@ app.post('/quote', function (request, res) {
     console.log("---> calculated quote: ")  
     console.log(quote)
 
-    var offers = [];
+    var offers = calculateOffers(country, travellerAges, cover);
 
     //res.status(204).send();
     res.json({
@@ -75,6 +75,20 @@ app.listen(3000, function () {
  console.log('Example app listening on port 3000!');
 });
 
+
+function calculateOffers(_country, _travellerAges, _cover) {
+
+    if (_country == 'CH') {
+        // ...
+        calculateOffer01();
+    }
+
+    return [];
+}
+
+function calculateOffer01() {
+    return [];
+}
 
 function calculateQuote(_departureDate, _returnDate, _travellerAges, _country, _cover, _options) {
   var country = getCountry(_country),
